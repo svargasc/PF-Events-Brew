@@ -9,6 +9,8 @@ import {
 import { auth } from "../middlewares/auth.middleware.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { createEventSchema } from "../schemas/event.schema.js";
+import { register } from "../controllers/auth.controller.js";
+import { registerSchema } from "../schemas/auth.schema.js";
 
 const router = Router();
 
