@@ -23,13 +23,13 @@ jobs:
 
       - name: npm install and run dev
         run: |
-          cd PF-Events-Brew/backend
+          cd backend
           npm install
           npm run dev
 
       - name: npm install and run dev
         run: |
-          cd PF-Events-Brew/frontend
+          cd frontend
           npm install
           npm run dev
         
