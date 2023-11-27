@@ -23,15 +23,9 @@ jobs:
 
       - name: npm install and run dev
         run: |
-          npm install
-          npm run dev
-
-      - name: npm install and run dev
-        run: |
           cd frontend
           npm install
           npm run dev
-        
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
