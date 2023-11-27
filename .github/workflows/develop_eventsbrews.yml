@@ -21,15 +21,15 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: npm install, - backend
+      - name: npm install and run dev
         run: |
-          cd backend
+          cd PF-Events-Brew/backend
           npm install
           npm run dev
 
-      - name: Install npm packages -frontend
+      - name: npm install and run dev
         run: |
-          cd frontend
+          cd PF-Events-Brew/frontend
           npm install
           npm run dev
         
