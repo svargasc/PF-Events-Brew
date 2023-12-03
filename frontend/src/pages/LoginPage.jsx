@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import logoeventBrew from '../img/logoeventsBrew.png'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../context/AuthContext';
 
@@ -8,11 +8,17 @@ import { useAuth } from '../context/AuthContext';
 function LoginPage() {
 
   const {register, handleSubmit, formState: { errors },} = useForm();
-    const {signin, errors: signinErrors} = useAuth();
+    const {signin, errors: signinErrors, isAuthenticated} = useAuth();
+
+    const navigate = useNavigate()
 
   const onSubmit = handleSubmit((data) => {
     signin(data);
   })
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/events")
+  },[isAuthenticated])
 
   return (
     <>
@@ -20,7 +26,7 @@ function LoginPage() {
             <h2 className='text-7xl text-[#FFEEB3]'>INICIA SESION</h2>
             <div className="flex justify-center items-center h-4/5 w-[80%]">
                 <div className='flex flex-col justify-center items-center w-1/2'>
-                    <img className='1/2' src={ logoeventBrew } alt="" />
+                    <Link to="/"><img className='1/2' src={ logoeventBrew } alt="" /></Link>
                     <p className='bg-[#4A2D0B] rounded-full py-1 px-4 text-[#FFEEB3] text-2xl '>¿Aún no tienes cuenta? Registrate aquí. <NavLink className="text-[#AC703E] underline hover:font-bold" to="/register" >Registrarse</NavLink> </p>
                 </div>
                 <form 
