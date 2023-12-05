@@ -18,24 +18,33 @@ export const AuthProvider = ({children}) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(true);
+    
+    useEffect(() => {
+        if (errors.length > 0) {
+           const timer = setTimeout(() => {
+                setErrors([])
+            }, 5000)
+            return () => clearTimeout(timer)
+        }
+    }, [errors]);
 
     const signup = async (user) => {
             try {
                 const res = await registerRequest(user);
-                console.log(res);
-                setUser(res.data);
-                setIsAuthenticated(true);
-                setUser(res.data)
+                if(res.status === 200) {
+                    setUser(res.data);
+                    setIsAuthenticated(true);
+                }
             } catch (error) {
-                //console.log(error.response);
-                setErrors(error.response.data)
+                console.log(error.response.data);
+                setErrors(error.response.data.message)
             }
     };
 
     const signin = async (user) => {
         try {
            const res = await loginRequest(user) 
-           console.log(res);
+           setUser(res.data)
            setIsAuthenticated(true)
         } catch (error) {
             if (Array.isArray(error.response.data)) {
@@ -47,18 +56,10 @@ export const AuthProvider = ({children}) => {
 
     const logout = () => {
         Cookies.remove("token")
-        setIsAuthenticated(false)
         setUser(null)
+        setIsAuthenticated(false)
     }
 
-    useEffect(() => {
-        if (errors.length > 0) {
-           const timer = setTimeout(() => {
-                setErrors([])
-            }, 5000)
-            return () => clearTimeout(timer)
-        }
-    }, [errors])
 
     useEffect(()=> {
         async function checkLogin () {

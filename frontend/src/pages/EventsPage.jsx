@@ -23,12 +23,12 @@ function EventsPage() {
         <div className='w-full flex h-full justify-center items-center gap-3 flex-wrap'>
           {
             events.map(event => (
-              <div key={event._id} className='bg-[#000000a4] w-1/4 h-2/3 flex flex-col justify-between rounded-2xl text-[#FFEEB3]' >
-                <img className="h-2/4 border-4 m-4 rounded-2xl border-[#AC703E]" src="" alt="" />
+              <div key={event._id} className='bg-[#000000a4] w-1/4 h-[90%] flex flex-col justify-between rounded-2xl text-[#FFEEB3]' >
+                <img className="h-2/4 w-[90%] border-4 m-4 rounded-2xl border-[#AC703E]" src="" alt="" />
                 <h2 className='text-center text-2xl'>{event.name}</h2>
                 <p className='text-center text-xl'>{event.address}</p>
-                <p className='text-center text-xl'>{event.description}</p>
-                <p className='text-center text-xl'>{dayjs(event.date).utc().format("DD/MM/YYYY")}</p>
+                <p className='text-center text-xl h-18 w-3/4 mx-auto'>{event.description}</p>
+                <p className='text-center text-xl '>{dayjs(event.date).utc().format("DD/MM/YYYY")}</p>
                 <div className='flex justify-between items-center'>
                   <Link className='flex items-center justify-center bg-[#FFEEB3] text-[#AC703E] text-xl m-2 font-bold h-12 w-2/5 rounded-full mt-2 hover:bg-[#AC703E] hover:text-[#FFEEB3] duration-300' to={`/events/${event._id}`}>Editar evento</Link>
                   <button className='bg-[#FFEEB3] text-[#AC703E] text-xl m-2 font-bold h-12 w-1/3 rounded-full mt-2 hover:bg-red-700 hover:text-[#FFEEB3] duration-300' onClick={()=>{deleteEvent(event._id)}}>Eliminar</button>

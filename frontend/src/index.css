@@ -13,3 +13,6 @@ body{
   color: white;
 }
 
+p{
+  overflow-wrap: break-word;
+}

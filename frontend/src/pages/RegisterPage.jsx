@@ -5,21 +5,26 @@ import { useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
 
 
-function RegisterPage() {
 
-    const { register, handleSubmit, formState: {
-        errors
-    } } = useForm();
-    const {signup, isAuthenticated , errors: registerErrors} = useAuth();
+function RegisterPage() {
+    const {signup, errors: registerErrors, isAuthenticated} = useAuth();
+
+    const { 
+        register, 
+        handleSubmit, 
+        formState: {errors},
+     } = useForm();
+    
     const navigate = useNavigate();
+    
+    
+    const onSubmit = handleSubmit(async (values) => {
+        await signup(values);
+    });
     
     useEffect(() => {
         if (isAuthenticated) navigate('/events')
     }, [isAuthenticated])
-
-    const onSubmit = handleSubmit(async (values) => {
-        signup(values);
-    });
 
   return (
     <>
